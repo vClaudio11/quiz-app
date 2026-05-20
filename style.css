@@ -24,6 +24,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 #progress {
@@ -127,5 +129,9 @@ body {
 }
 
 #results-container.hidden {
+    display: none;
+}
+
+#quiz-container.hidden {
     display: none;
 }
