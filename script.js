@@ -60,6 +60,8 @@ let currentIndex = 0;
 let score = 0;
 
 // grab all the elements we need from the DOM
+const startContainer = document.querySelector('#start-container');
+const startBtn = document.querySelector('#start-btn');
 const questionText = document.querySelector('#question-text');
 const answerButtons = document.querySelectorAll('.answer-btn');
 const nextBtn = document.querySelector('#next-btn');
@@ -70,22 +72,28 @@ const resultsContainer = document.querySelector('#results-container');
 const finalScore = document.querySelector('#final-score');
 const restartBtn = document.querySelector('#restart-btn');
 
+startBtn.addEventListener('click', () => {
+    startContainer.classList.add('hidden');
+    quizContainer.classList.remove('hidden');
+    loadQuestion();
+});
+
 // load the current question and answers onto the screen
 function loadQuestion() {
-    quizContainer.classList.remove('hidden');
     const current = questions[currentIndex];    
-
+    
     questionText.textContent = current.question;
     questionNumber.textContent = `Question ${currentIndex + 1} of ${questions.length}`;
-
+    
     answerButtons.forEach((button, index) => {
         button.textContent = current.answers[index];
         button.classList.remove('correct', 'incorrect');
         button.disabled = false;
     });
-
+    
     nextBtn.style.display = 'none';
 }
+
 
 // start quiz
 loadQuestion();
@@ -140,8 +148,8 @@ restartBtn.addEventListener('click', () => {
     currentIndex = 0;
     score = 0;
     resultsContainer.classList.add('hidden');
-    quizContainer.classList.remove('hidden');
-    loadQuestion();
+    quizContainer.classList.add('hidden');
+    startContainer.classList.remove('hidden');
 });
 
 // attach click event listener to restart button
